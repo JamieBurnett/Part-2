@@ -12,7 +12,8 @@ public class Knight : MonoBehaviour
     Animator animator;
     bool clickingSelf = false;
     public float maxHealth;
-    float health;    
+    float health;
+    bool dead;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class Knight : MonoBehaviour
         {
             movement = Vector2.zero;
         }
-        
+        dead = health <= 0;
 
         rb.MovePosition((Vector2)transform.position + movement.normalized*speed*Time.deltaTime);
     }
@@ -44,8 +45,14 @@ public class Knight : MonoBehaviour
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
         animator.SetFloat("Movement", movement.magnitude);
-
+        if (Input.GetMouseButtonDown(1) && !clickingSelf && !dead)
+        {
+            animator.SetTrigger("Attack");
+        }
+        
     }
+
+
     
     private void OnMouseDown() 
     {
