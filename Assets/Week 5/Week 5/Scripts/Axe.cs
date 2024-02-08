@@ -12,7 +12,7 @@ public class Axe : MonoBehaviour
     {
         Destroy(gameObject,6);
         rb = GetComponent<Rigidbody2D>();
-        velocity = new Vector2(-5, 0);
+        velocity = new Vector2(-8, 0);
         rb.velocity = velocity;
     }
 
