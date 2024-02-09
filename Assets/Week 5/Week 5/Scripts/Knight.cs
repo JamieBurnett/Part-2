@@ -40,7 +40,7 @@ public class Knight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !clickingSelf)
+        if (Input.GetMouseButtonDown(0) && !clickingSelf && !dead)
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -65,13 +65,12 @@ public class Knight : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        
         health -= damage;
         health = Mathf.Clamp(health,0,maxHealth);
         if(health == 0)
         {
-            //kill the character
             animator.SetTrigger("Die");
+            movement = Vector2.zero;
         }
 
         
