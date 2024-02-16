@@ -11,4 +11,8 @@ public class Healthbar : MonoBehaviour
     {
         slider.value -= damage;
     }
+    public void SetHealth(float maxHp)
+    {
+        slider.value = PlayerPrefs.GetFloat("health",maxHp); ;
+    }
 }

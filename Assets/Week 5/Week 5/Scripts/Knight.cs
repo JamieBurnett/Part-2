@@ -15,13 +15,14 @@ public class Knight : MonoBehaviour
     public float maxHealth;
     float health;
     bool dead;
+    public GameObject healthbar;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        health = maxHealth;
+        gameObject.SendMessage("SetHealth",maxHealth);
     }
 
     private void FixedUpdate()
@@ -68,14 +69,30 @@ public class Knight : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health,0,maxHealth);
-        if(health == 0)
+        DieCheck();
+        PlayerPrefs.SetFloat("health",health);
+
+        animator.SetTrigger("TakeDamage");
+    }
+   
+    public void DieCheck()
+    {
+        if (health == 0)
         {
             animator.SetTrigger("Die");
             movement = Vector2.zero;
         }
-
-        
-        animator.SetTrigger("TakeDamage");
     }
-   
+    public void SetHealth()
+    {
+        health = PlayerPrefs.GetFloat("health", maxHealth);
+        DieCheck();
+        
+    }
+  
+    public void forgetHp() //resets hp to the default value
+    {
+        PlayerPrefs.SetFloat("health",maxHealth);
+        gameObject.SendMessage("SetHealth",maxHealth);
+    }
 }
