@@ -33,4 +33,16 @@ public class SceneButton : MonoBehaviour
         }
         SceneManager.LoadScene(sceneIndex);
     }
+    public void resolutionChangeHD()
+    {
+            Screen.SetResolution(1920, 1080, false);
+        
+        
+    }
+    public void resolutionChange16()
+    {
+        Screen.SetResolution(1024, 576, false);
+
+
+    }
 }
