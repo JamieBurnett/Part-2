@@ -7,6 +7,10 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     public float speed;
+    public GameObject mySword;
+    public GameObject swordPrefab;
+    public static Vector2 swordAim;
+    public float swordCooldownTime;
 
     private bool amClickingSelf = false;
     private Vector2 destination;
@@ -14,9 +18,13 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D myRb;
     private Animator myAnim;
     private bool dead = false;
+    
+    private float swordCooldown;
+    
     // Start is called before the first frame update
     void Start()
     {
+        swordCooldown = swordCooldownTime;
         myRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
     }
@@ -28,11 +36,20 @@ public class PlayerControls : MonoBehaviour
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
-        
+        if (Input.GetMouseButton(1) && !amClickingSelf && !dead && swordCooldown > swordCooldownTime)
+        {
+            swordCooldown = 0;
+            myAnim.SetTrigger("attack");
+            swordAim = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            throwSword();
+            
+        }
+
     }
 
     private void FixedUpdate()
     {
+        swordCooldown += Time.deltaTime;
         change = destination - (Vector2)transform.position;
         
         if (change.magnitude < 0.2)
@@ -42,6 +59,7 @@ public class PlayerControls : MonoBehaviour
         myAnim.SetFloat("changemagnitude", change.magnitude);
 
         myRb.MovePosition((Vector2)transform.position + change.normalized * Time.deltaTime * speed);
+        
     }
 
     private void OnMouseDown()
@@ -53,5 +71,9 @@ public class PlayerControls : MonoBehaviour
     {
         amClickingSelf = false;
     }
-    
+
+    private void throwSword()
+    {
+        Instantiate(swordPrefab,transform.position, Quaternion.identity);
+    }
 }

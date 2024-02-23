@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &714838351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 112545099366660466, guid: ee9a81cf59c6d97478f9f65d8da973e5, type: 3}
+  m_PrefabInstance: {fileID: 763262588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763262588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,7 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecb0c0028614d44698bc9de5d7b72e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
+  mySword: {fileID: 714838351}
+  swordPrefab: {fileID: 40416164470755409, guid: ae8da5a3f6d43d54d8d2a06b24b3ed93, type: 3}
+  swordCooldownTime: 0.5
 --- !u!70 &1784996297
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -366,7 +374,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784996294}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
