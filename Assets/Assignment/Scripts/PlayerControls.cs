@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     public static Vector2 swordAim;
     public static Transform PlayerTransform;
     public float swordCooldownTime;
+    public GameObject gameoverUI;
 
     private bool amClickingSelf = false;
     private Vector2 destination;
@@ -25,6 +26,7 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameoverUI.SetActive(false);
         swordCooldown = swordCooldownTime;
         myRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
@@ -85,5 +87,7 @@ public class PlayerControls : MonoBehaviour
         change = Vector2.zero;
         dead = true;
         myAnim.SetTrigger("die"); //technically could add another check to only do this if not already dead, but I like the way the cubes beating the body up looks 
+        gameoverUI.SetActive(true);
+
     }
 }

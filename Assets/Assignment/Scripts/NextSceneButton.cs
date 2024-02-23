@@ -32,4 +32,11 @@ public class NextSceneButton : MonoBehaviour
         }
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void reloadScene()
+    {
+        SceneManager.LoadScene(sceneIndex);
+
+    }
+
 }
