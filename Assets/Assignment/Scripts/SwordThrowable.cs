@@ -34,6 +34,6 @@ public class SwordThrowable : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.collider.SendMessage("takeDamage", 1);
+        collision.collider.SendMessage("takeDamage");
     }
 }

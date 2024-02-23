@@ -10,6 +10,7 @@ public class PlayerControls : MonoBehaviour
     public GameObject mySword;
     public GameObject swordPrefab;
     public static Vector2 swordAim;
+    public static Transform PlayerTransform;
     public float swordCooldownTime;
 
     private bool amClickingSelf = false;
@@ -27,6 +28,7 @@ public class PlayerControls : MonoBehaviour
         swordCooldown = swordCooldownTime;
         myRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+        PlayerTransform = transform;
     }
 
     // Update is called once per frame
@@ -75,5 +77,13 @@ public class PlayerControls : MonoBehaviour
     private void throwSword()
     {
         Instantiate(swordPrefab,transform.position, Quaternion.identity);
+    }
+    private void die()
+    {
+        Debug.Log("died");
+        destination = (Vector2)transform.position;
+        change = Vector2.zero;
+        dead = true;
+        myAnim.SetTrigger("die"); //technically could add another check to only do this if not already dead, but I like the way the cubes beating the body up looks 
     }
 }
